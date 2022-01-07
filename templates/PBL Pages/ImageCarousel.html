@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+{% extends "layouts/base.html" %}
+{%block head %}
 <style>
     *, *::before, *::after {
         box-sizing: border-box;
@@ -53,7 +55,7 @@
         color: rgba(255, 255, 255, .5);
         cursor: pointer;
         border-radius: .25rem;
-        padding: 0 .5rem;
+        padding: 0 0rem;
         background-color: rgba(0, 0, 0, .1);
     }
 
@@ -83,6 +85,10 @@
     <title>Title</title>
 </head>
 
+{% endblock %}
+
+{% block body %}
+
 <body>
     <section aria-label="Newest Photos">
         <div class="carousel" data-carousel>
@@ -102,4 +108,7 @@
         </div>
     </section>
 </body>
+
+{% endblock %}
+
 </html>

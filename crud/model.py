@@ -32,6 +32,7 @@ class Classes(db.Model):
         self.className = className
         self.teacher = teacher
 
+
     # CRUD create/add a new record to the table
     # returns self or None on error
     def create(self):

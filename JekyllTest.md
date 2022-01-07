@@ -1,7 +1,6 @@
-layout: page
+---
+layout: default
+---
+{% include navigation.html %}
 
-title: JekyllTest
-
-permalink: https://connorw72/food/jekyllTest
-
-info and stuff bazinga
+{% include_relative README.md %}

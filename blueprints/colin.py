@@ -12,3 +12,8 @@ def colin():
 def imageCarousel():
     return render_template('PBL Pages/imageCarousel.html')
 
+@bcolin.route('/jekyll/')
+def jekyll():
+    return render_template('jekyll.html')
+
+

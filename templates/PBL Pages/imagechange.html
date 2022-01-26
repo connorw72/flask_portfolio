@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .container{
+            width: 1000px;
+            height: 1000px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .bulb-off{
+            width: 500px;
+            height: 700px;
+            background: url('lightbulb-off.png') no-repeat;
+            margin: auto;
+        }
+
+        .bulb-on{
+            width: 500px;
+            height: 700px;
+            background: url('lightbulb-on.png') no-repeat;;
+            margin: auto;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>Change Image on Click</title>
+</head>
+<body>
+<div class="container">
+    <h1>Click on the Lightbulb</h1>
+    <div id="lightbulb" class="bulb-off"></div>
+</div>
+<script>
+    const light = document.getElementById('lightbulb');
+
+    light.addEventListener('click', function(light){
+        light.target.classList.toggle('bulb-on');
+    });
+</script>
+</body>
+</html>

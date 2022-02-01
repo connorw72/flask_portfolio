@@ -89,6 +89,18 @@
             <span id="clock"></span>
         </div>
     </div>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+        <div class = "float-right">
+            <input type="text" class="form-control" id="term" placeholder="enter search term">
+        </div>
+        <div>
+            <button class="btn btn-primary bg-secondary" data-bs-toggle="offcanvas" data-bs-target="#searchBar" onclick="nav_search();">Search</button>
+        </div>
+    </div>
+    {% block navbar_script %}
+        <!-- Navigation bar JavaScript support -->
+        <script src={{  url_for("static", filename="javascript/navbar.js", version='140') }}></script>
+    {% endblock %}
 
 </nav>
 

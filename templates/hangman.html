@@ -17,7 +17,7 @@
         // it's more of a "hey guess this word and see if you're right"
         // letters don't work
 
-        var words = ["cat","dog","frog","turtle","bird","fish","horse","sugarglider","chinchilla","hamster","rabbit","mouse","pig","ferret"] // array for words
+        var words = ["cat","dog","frog","turtle","bird","fish","horse","sugarglider","chinchilla","hamster","rabbit","mouse","pig","ferret","lizard","snake","hedgehog","platypus"] // array for words
         var word = words[Math.floor(Math.random() * words.length)];
         var lives = 0
         var spaces = ""
@@ -25,15 +25,21 @@
             document.getElementById("space").innerHTML = '';
             var spaces = ''
             for (var i = 0; i < word.length; i++) {
-                // lettersNum[i] = "_ ";
-                // var spaceElement = document.createElement("_ ");
-                // document.getElementById("space").appendChild(spaceElement);
+                // creating spaces for word length and a life counter
                 spaces += "_ ";
                 lives += 1
             }
+            lives += 1 // adds an extra life because getting it wrong removes 1 immediately, crude, but it works
             document.getElementById("space").innerHTML = spaces
             // alert(document.getElementById("space").innerHTML)
         }
+
+        document.addEventListener("keydown", function(event) {
+        if (event.which == 13) {
+            hangman()
+        }
+        });
+
         function hangman() {
             // var word = document.getElementById("word").innerText;
             var guessW = document.getElementById("guess_word").value;
@@ -41,15 +47,22 @@
                 document.getElementById("space").innerHTML = word
                 document.getElementById("guess_word").value = ''; // clears input field
                 alert("CONGRATULATIONS!")
-                // congrats = document.getElementById("congrats");
-                // congrats.style.display === "block";
-                // document.getElementById("guessed").innerHTML = word;
                 document.getElementById("lives").style.display = 'none';
+                document.getElementById("reload").style.display = 'inline'
             } else if ( guessW !== word) {
                 document.getElementById("guess_word").value = ''; // clears input field
-                alert("wrong, try again")
-                lives - 1
+                // alert("wrong, try again")
+                lives -= 1
                 document.getElementById("lives").innerHTML = "you have " + lives + " lives left"
+            }
+            if ( lives < 1 ) {
+                alert("Game Over. You stink")
+                document.getElementById("reload").style.display = 'inline'
+                document.getElementById("guessbtn").style.display = 'none';
+                document.getElementById("lives").innerHTML = 'Game Over, Try Again.'
+                if ( word === "platypus") // troll
+                    document.getElementById("pets").src = "https://c.tenor.com/JtHxeUH0YNgAAAAM/perry-the-platypus-serious.gif"
+
             }
         }
         function FF() {
@@ -99,14 +112,15 @@
         <input type="button" value="Give Up" onclick="FF()">
         <br>
         <p id="lives"></p>
+        <button id="reload" style="display: none; text-align: center;" onclick="location.reload();">Restart?</button>
+
         <!-- Guessing a Single Letter -->
         <label for="guess_letter">Guess a Letter</label>
         <input type="text" id="guess_letter" name="guess_letter" maxlength="1">
         <input type="submit" value="Submit" onclick="letter()">
         <br>
-        <img id="place" class="img-responsive py-3" alt="" width="25%" src="https://autumntrailsvet.com/wp-content/uploads/2020/04/We-care-for-many-kinds-of-animals.png" >
-        <!-- THEY'RE DIFF SIZES <img id="place" class="img-responsive py-3" alt="" width="25%" src="/static/assets/pitbull.jpg" > --> 
-
+        <img id="pets" class="img-responsive py-3" alt="" width="25%" src="https://autumntrailsvet.com/wp-content/uploads/2020/04/We-care-for-many-kinds-of-animals.png" >
+        <!-- THEY'RE DIFF SIZES <img id="place" class="img-responsive py-3" alt="" width="25%" src="/static/assets/pitbull.jpg" > -->
     </div>
     
 

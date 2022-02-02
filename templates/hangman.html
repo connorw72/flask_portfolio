@@ -16,7 +16,7 @@
         // hangman game testing
         // it's more of a "hey guess this word and see if you're right"
         // letters don't work
-
+    
         var words = ["cat","dog","frog","turtle","bird","fish","horse","sugarglider","chinchilla","hamster","rabbit","mouse","pig","ferret","lizard","snake","hedgehog","platypus"] // array for words
         var word = words[Math.floor(Math.random() * words.length)];
         var lives = 0   
@@ -45,8 +45,8 @@
             if ( guessW == word ) {
                 document.getElementById("space").innerHTML = word
                 document.getElementById("guess_word").value = ''; // clears input field
-                alert("CONGRATULATIONS!")
-                document.getElementById("lives").style.display = 'none';
+                document.getElementById("lives").innerHTML = "CONGRATULATIONS!"
+                document.body.style.backgroundImage = "url('https://acegif.com/wp-content/gif/confetti-10.gif')"
                 document.getElementById("reload").style.display = 'inline'
             } else if ( guessW !== word) {
                 document.getElementById("guess_word").value = ''; // clears input field
@@ -55,7 +55,7 @@
                 document.getElementById("lives").innerHTML = "you have " + lives + " lives left"
             }
             if ( lives < 1 ) {
-                alert("Game Over. You stink")
+                // alert("Game Over. You stink")
                 document.getElementById("reload").style.display = 'inline'
                 document.getElementById("guessbtn").style.display = 'none';
                 document.getElementById("lives").innerHTML = 'Game Over, Try Again.'

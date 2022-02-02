@@ -7,9 +7,48 @@
     <title>Hangman</title>
 
     <script>
+        
         function dark() {
             var element = document.getElementById('navbarNavAltMarkup');
             element.classList.toggle("dark-mode");
+        }
+
+        // hangman game testing
+        // it's more of a "hey guess this word and see if you're right"
+        // letters don't work
+
+        var words = ["cat","dog","frog","turtle","bird","fish","horse","sugarglider","chinchilla","hamster","rabbit","mouse","pig","ferret"] // array for words
+        var word = words[Math.floor(Math.random() * words.length)];
+
+        function spacesList() {
+            document.getElementById("space").innerHTML = '';
+            var spaces = ''
+            for (var i = 0; i < word.length; i++) {
+                // lettersNum[i] = "_ ";
+                // var spaceElement = document.createElement("_ ");
+                // document.getElementById("space").appendChild(spaceElement);
+                spaces += "_ "
+            }
+            document.getElementById("space").innerHTML = spaces
+            // alert(document.getElementById("space").innerHTML)
+        }
+        function hangman() {
+            // var word = document.getElementById("word").innerText;
+            var guessW = document.getElementById("guess_word").value;
+            if ( guessW == word ) {
+                document.getElementById("space").innerHTML = word
+                document.getElementById("guess_word").value = ''; // clears input field
+                alert("CONGRATULATIONS!")
+                // congrats = document.getElementById("congrats");
+                // congrats.style.display === "block";
+                // document.getElementById("guessed").innerHTML = word;
+            } else if ( guessW !== word) {
+                document.getElementById("guess_word").value = ''; // clears input field
+                alert("wrong, try again")
+            }
+        }
+        function FF() {
+            alert("weakling, word is " + word)
         }
     </script>
 
@@ -23,33 +62,38 @@
 </head>
 {% endblock %}
 {% block body %}
-<body>
-
+<body onload="spacesList()">
     <style>
         html,body {
             background-color: royalblue;
         }
     </style>
+    <div style="text-align: center;">
+        <h1>Hangman Game</h1>
+        <p>The word is a type of pet</p>
+        <p id=space></p>
+        <!-- removed for testing, using an array for now -->
+        <!-- <label for="word">Word</label>
+        <input type="text" id="word" name="word"><br> -->
+        <!-- Guessing the Word -->
+        <label for="guess_word">Guess the Word</label>
+        <input id="guess_word" name="guess_word">
+        <input id="guessbtn" type="button" value="Guess" onclick="hangman()">
+        <input type="button" value="Give Up" onclick="FF()">
+        <!-- Guessing a Single Letter -->
+        <!-- <label for="guess_letter">Guess a Letter</label>
+        <input type="text" id="guess_letter" name="guess_letter"> 
+        <input type="submit" value="Submit" onclick="hangman()"> -->
+        <!-- <p style="display: none" id="congrats">Congratulations, the word was <p id=guessed></p></p> -->
+        <br>
+        <img id="place" class="img-responsive py-3" alt="" width="25%" src="https://autumntrailsvet.com/wp-content/uploads/2020/04/We-care-for-many-kinds-of-animals.png" >
+        <!-- THEY'RE DIFF SIZES <img id="place" class="img-responsive py-3" alt="" width="25%" src="/static/assets/pitbull.jpg" > --> 
 
-    <h1>Input Random Pet Name</h1>
+    </div>
+    
 
-    <form action="/">
-        <label for="word">Word</label>
-        <input type="text" id="fname" name="fname"><br><br>
-        <label for="guess">Guess</label>
-        <input type="text" id="lname" name="lname"><br><br>
-        <input type="submit" value="Submit">
-    </form>
-
-    <p>Guess the Pet Name (Do With Partner!)</p>
-
-    <div>
-        <button onclick="dark()">Toggle dark mode</button>
-        <div/>
-
-
-        <img id="place" class="img-responsive py-3" alt="" width="500" src="/static/assets/pets.jpeg" >
-        <img id="place" class="img-responsive py-3" alt="" width="256" src="/static/assets/pitbull.jpg" >
+    <!-- <p>Guess the Pet Name (Do With Partner!)</p> -->
+    
 
 </body>
 </html>

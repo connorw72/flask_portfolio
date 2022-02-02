@@ -20,6 +20,7 @@
         var words = ["cat","dog","frog","turtle","bird","fish","horse","sugarglider","chinchilla","hamster","rabbit","mouse","pig","ferret"] // array for words
         var word = words[Math.floor(Math.random() * words.length)];
         var lives = 0
+        var spaces = ""
         function spacesList() {
             document.getElementById("space").innerHTML = '';
             var spaces = ''
@@ -54,6 +55,18 @@
         function FF() {
             alert("weakling, word is " + word)
         }
+        function letter() {
+            var guess = document.getElementById("guess_letter").value;
+            for (var i = 0; i < word.length; i++) {
+                if (word[i] == guess) {
+                    spaces[i].innerHTML = guess;
+                    document.getElementById("space").innerHTML = spaces
+                    alert("Letter works")
+                }
+                alert("Incorrect letter")
+                document.getElementById("guess_letter").value = ''; // clears input field
+            }
+        }
     </script>
 
     <style>
@@ -87,10 +100,9 @@
         <br>
         <p id="lives"></p>
         <!-- Guessing a Single Letter -->
-        <!-- <label for="guess_letter">Guess a Letter</label>
-        <input type="text" id="guess_letter" name="guess_letter"> 
-        <input type="submit" value="Submit" onclick="hangman()"> -->
-        <!-- <p style="display: none" id="congrats">Congratulations, the word was <p id=guessed></p></p> -->
+        <label for="guess_letter">Guess a Letter</label>
+        <input type="text" id="guess_letter" name="guess_letter" maxlength="1">
+        <input type="submit" value="Submit" onclick="letter()">
         <br>
         <img id="place" class="img-responsive py-3" alt="" width="25%" src="https://autumntrailsvet.com/wp-content/uploads/2020/04/We-care-for-many-kinds-of-animals.png" >
         <!-- THEY'RE DIFF SIZES <img id="place" class="img-responsive py-3" alt="" width="25%" src="/static/assets/pitbull.jpg" > --> 

@@ -30,3 +30,6 @@ def PetInfo():
 def PetQuiz():
     return render_template('PetQuiz.html')
 
+@bconnor.route('/petpage/')
+def petpage():
+    return render_template("petpage.html")

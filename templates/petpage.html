@@ -1,0 +1,189 @@
+<!-- Extending the predefined project layout -->
+{% extends "layouts/base.html" %}
+
+
+<!- This is turning off birds background from base.html -->
+{% block background %}
+{% endblock %}
+
+{% block body %}
+    <style>
+        h1 {
+            font-family: "Licorice";
+            font-size: 69px;
+            color: black;
+        }
+        body {
+            background-color: antiquewhite;
+        }
+        .column {
+            float: left;
+            width: 50%;
+            text-align: center;
+        }
+        .coursebtn {
+            padding: 30px;
+        }
+        .coursebtn:link,
+        .coursebtn:visited {
+            text-transform: uppercase;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 100px;
+            transition: all .2s;
+            color: black;
+            font-size: 20px;
+            font-weight: 900;
+        }
+        .dark-mode {
+            background-color: #35363a;
+            color: #b3b3b3;
+        }
+        .coursebtn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(255, 255, 255, 0.2);
+            background-image: url(
+            'https://i1.wp.com/www.additudemag.com/wp-content/uploads/2021/09/GettyImages-1044168372.jpg?resize=1280%2C720px&ssl=1');
+            background-size: cover;
+        }
+
+        .coursebtn2 {
+            padding: 30px;
+        }
+        .coursebtn2:link,
+        .coursebtn2:visited {
+            text-transform: uppercase;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 100px;
+            transition: all .2s;
+            color: black;
+            font-size: 20px;
+            font-weight: 900;
+        }
+
+        .coursebtn2:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(255, 255, 255, 0.2);
+            background-image: url(
+            'https://www.eschoolnews.com/files/2016/12/computer-science-education.jpg');
+            background-size: cover;
+            color: white;
+        }
+
+        .coursebtn3 {
+            padding: 30px;
+        }
+        .coursebtn3:link,
+        .coursebtn3:visited {
+            text-transform: uppercase;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 100px;
+            transition: all .2s;
+            color: black;
+            font-size: 20px;
+            font-weight: 900;
+        }
+
+        .coursebtn3:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(255, 255, 255, 0.2);
+            background-image: url(
+            'https://alameda.edu/wp-content/uploads/2021/07/History.png');
+            background-size: cover;
+        }
+
+        .coursebtn4 {
+            padding: 30px;
+        }
+        .coursebtn4:link,
+        .coursebtn4:visited {
+            text-transform: uppercase;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 100px;
+            transition: all .2s;
+            color: black;
+            font-size: 20px;
+            font-weight: 900;
+        }
+
+        .coursebtn4:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(255, 255, 255, 0.2);
+            background-image: url(
+            'https://media.istockphoto.com/vectors/english-vector-id1047570732?k=20&m=1047570732&s=612x612&w=0&h=fcgzlrNrq_hws1ykrLSpyBVZoIGr54EUueD6WAEVW0c=');
+            background-size: cover;
+        }
+
+        .coursebtn5 {
+            padding: 30px;
+        }
+        .coursebtn5:link,
+        .coursebtn5:visited {
+            text-transform: uppercase;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 100px;
+            transition: all .2s;
+            color: black;
+            font-size: 20px;
+            font-weight: 900;
+        }
+
+        .coursebtn5:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(255, 255, 255, 0.2);
+            background-image: url(
+            'https://i0.wp.com/prosancons.com/wp-content/uploads/2018/05/050218_1243_Prosandcons1.png?fit=600%2C300&ssl=1');
+            background-size: cover;
+        }
+
+        .coursebtn6 {
+            padding: 30px;
+        }
+        .coursebtn6:link,
+        .coursebtn6:visited {
+            text-transform: uppercase;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 100px;
+            transition: all .2s;
+            color: black;
+            font-size: 20px;
+            font-weight: 900;
+        }
+
+        .coursebtn6:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(255, 255, 255, 0.2);
+            background-image: url(
+            'https://scse.d.umn.edu/sites/scse.d.umn.edu/files/umd_dept_home/physics-chalkboard_cropped.jpg');
+            background-size: cover;
+            color: white;
+        }
+
+
+    </style>
+    <!-- this formatting is horrible LMFAO -->
+    <div class="container" style="margin-top: 8px">
+        <h1 style="text-align:center">ClassBoard</h1>
+        <div class="row">
+            <div class="column">
+                <a style="margin-bottom: 20%;" href="{{ url_for('bchase.cat') }}" class="coursebtn">Cats</a>
+                <br>
+                <a  href="{{ url_for('bpranav.birds') }}" class="coursebtn2">Birds</a>
+                <br>
+                <a style="margin-top: 20%;"  href="{{ url_for('bpranav.dogs') }}" class="coursebtn3">Dogs</a>
+            </div>
+            <div class="column">
+                <a style="margin-bottom: 20%;" href="{{ url_for('btanay.pethistory') }}" class="coursebtn4">Pet History</a>
+                <br>
+                <a  href="{{ url_for('bconnor.PetInfo') }}" class="coursebtn5">Pet Info</a>
+                <br>
+                <a style="margin-top: 20%;"  href="{{ url_for('bchase.enclosures') }}" class="coursebtn6">Pet Enclosures</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

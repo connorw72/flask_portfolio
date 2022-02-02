@@ -11,7 +11,9 @@ from blueprints.pranav import bpranav
 from blueprints.colin import bcolin
 from blueprints.chase import bchase
 from blueprints.tanay import btanay
+from crud2.center.center_app import app_crud_center
 # create a Flask instance
+app.register_blueprint(app_crud_center)
 app.register_blueprint(app_crud_api)
 app.register_blueprint(app_crud)
 app.register_blueprint(bconnor, url_prefix="/")

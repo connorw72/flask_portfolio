@@ -19,7 +19,7 @@
 
         var words = ["cat","dog","frog","turtle","bird","fish","horse","sugarglider","chinchilla","hamster","rabbit","mouse","pig","ferret"] // array for words
         var word = words[Math.floor(Math.random() * words.length)];
-
+        var lives = 0
         function spacesList() {
             document.getElementById("space").innerHTML = '';
             var spaces = ''
@@ -27,7 +27,8 @@
                 // lettersNum[i] = "_ ";
                 // var spaceElement = document.createElement("_ ");
                 // document.getElementById("space").appendChild(spaceElement);
-                spaces += "_ "
+                spaces += "_ ";
+                lives += 1
             }
             document.getElementById("space").innerHTML = spaces
             // alert(document.getElementById("space").innerHTML)
@@ -42,9 +43,12 @@
                 // congrats = document.getElementById("congrats");
                 // congrats.style.display === "block";
                 // document.getElementById("guessed").innerHTML = word;
+                document.getElementById("lives").style.display = 'none';
             } else if ( guessW !== word) {
                 document.getElementById("guess_word").value = ''; // clears input field
                 alert("wrong, try again")
+                lives - 1
+                document.getElementById("lives").innerHTML = "you have " + lives + " lives left"
             }
         }
         function FF() {
@@ -80,6 +84,8 @@
         <input id="guess_word" name="guess_word">
         <input id="guessbtn" type="button" value="Guess" onclick="hangman()">
         <input type="button" value="Give Up" onclick="FF()">
+        <br>
+        <p id="lives"></p>
         <!-- Guessing a Single Letter -->
         <!-- <label for="guess_letter">Guess a Letter</label>
         <input type="text" id="guess_letter" name="guess_letter"> 

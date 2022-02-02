@@ -11,8 +11,8 @@ def chase():
     return render_template('Chase.html', fgame=game())
 
 
-@bchase.route('/cats/')
-def cats():
+@bchase.route('/cat/')
+def cat():
     return render_template('cat.html')
 
 

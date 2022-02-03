@@ -33,3 +33,8 @@ def PetQuiz():
 @bconnor.route('/petpage/')
 def petpage():
     return render_template("petpage.html")
+
+
+@bconnor.route('/petdraw/')
+def petdraw():
+    return render_template("petdraw.html")

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<section class="container">
+    <div id="toolbar">
+        <h1>Draw a Pet!</h1>
+        <button id="clear">Clear</button>
+    </div>
+    <div class="drawing-board">
+        <canvas id="drawing-board"></canvas>
+    </div>
+</section>
+</body>
+</html>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        color: white;
+    }
+    .container {
+        height: 100%;
+        display: flex;
+    }
+
+    #toolbar {
+        display: flex;
+        flex-direction: column;
+        padding: 5px;
+        width: 150px;
+        background-color: #ADD8E6;
+    }
+
+    #toolbar * {
+        margin-bottom: 6px;
+    }
+
+    #toolbar label {
+        font-size: 12px;
+    }
+
+    #toolbar input {
+        width: 100%;
+    }
+
+    #toolbar button {
+        background-color: #1565c0;
+        border: none;
+        border-radius: 4px;
+        color:white;
+        padding: 2px;
+    }
+</style>
+<script>
+    const canvas = document.getElementById('drawing-board');
+    const toolbar = document.getElementById('toolbar');
+    const ctx = canvas.getContext('2d');
+
+    const canvasOffsetX = canvas.offsetLeft;
+    const canvasOffsetY = canvas.offsetTop;
+
+    canvas.width = window.innerWidth - canvasOffsetX;
+    canvas.height = window.innerHeight - canvasOffsetY;
+
+    let isPainting = false;
+    let startX;
+    let startY;
+
+    toolbar.addEventListener('click', petdraw => {
+        if (petdraw.target.id === 'clear') {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+    });
+
+
+    const draw = (petdraw) => {
+        if(!isPainting) {
+            return;
+        }
+        ctx.lineCap = 'round';
+        ctx.lineTo(petdraw.clientX - canvasOffsetX, petdraw.clientY);
+        ctx.stroke();
+    }
+
+    canvas.addEventListener('mousedown', (petdraw) => {
+        isPainting = true;
+        startX = petdraw.clientX;
+        startY = petdraw.clientY;
+    });
+
+    canvas.addEventListener('mouseup', (petdraw) => {
+        isPainting = false;
+        ctx.beginPath();
+    });
+
+    canvas.addEventListener('mousemove', draw);
+
+</script>

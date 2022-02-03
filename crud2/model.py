@@ -76,6 +76,68 @@ class Users(db.Model):
         return None
 
 
+
+class Centers(db.Model):
+    # define the Users schema
+    centerID = db.Column(db.Integer, primary_key=True)
+    centerName = db.Column(db.String(255), unique=False, nullable=False)
+    location = db.Column(db.String(255), unique=True, nullable=False)
+    email = db.Column(db.String(255), unique=False, nullable=False)
+    phone = db.Column(db.String(255), unique=False, nullable=False)
+
+    # constructor of a User object, initializes of instance variables within object
+    def __init__(self, centerName, location, email, phone):
+        self.centerName = centerName
+        self.location = location
+        self.email = email
+        self.phone = phone
+
+    # CRUD create/add a new record to the table
+    # returns self or None on error
+    def create(self):
+        try:
+            # creates a person object from Users(db.Model) class, passes initializers
+            db.session.add(self)  # add prepares to persist person object to Users table
+            db.session.commit()  # SqlAlchemy "unit of work pattern" requires a manual commit
+            return self
+        except IntegrityError:
+            db.session.remove()
+            return None
+
+    # CRUD read converts self to dictionary
+    # returns dictionary
+    def read(self):
+        return {
+            "centerID": self.centerID,
+            "centerName": self.centerName,
+            "location": self.location,
+            "email": self.email,
+            "phone": self.phone,
+        }
+
+    # CRUD update: updates users name, password, phone
+    # returns self
+    def update(self, centerName="", location="", email="", phone=""):
+        """only updates values with length"""
+        if len(centerName) > 0:
+            self.centerName = centerName
+        if len(location) > 0:
+            self.location = location
+        if len(email) > 0:
+            self.email = email
+        if len(phone) > 0:
+            self.phone = phone
+        db.session.commit()
+        return self
+
+    # CRUD delete: remove self
+    # None
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+        return None
+
+
 """Database Creation and Testing section"""
 
 
@@ -111,6 +173,36 @@ def model_printer():
         print(row)
 
 
+def center_model_tester():
+    print("--------------------------")
+    print("Seed Data for Table: Quiz")
+    print("--------------------------")
+    db.create_all()
+    """Tester data for table"""
+    q1 = Centers(centerName='center', location='san diego', email='something@gmail.com', phone="8588888888")
+    q2 = Centers(centerName='center2', location='LA', email='something2@gmail.com', phone="8589999999")
+    table = [q1, q2]
+    for row in table:
+        try:
+            db.session.add(row)
+            db.session.commit()
+        except IntegrityError:
+            db.session.remove()
+            print(f"Records exist, duplicate teacher, or error: {row.centerName}")
+
+
+def center_model_printer():
+    print("------------")
+    print("Table: users with SQL query")
+    print("------------")
+    result = db.session.execute('select * from centers')
+    print(result.keys())
+    for row in result:
+        print(row)
+
+
 if __name__ == "__main__":
     model_tester()  # builds model of Users
     model_printer()
+    center_model_tester()  # builds model of Centers
+    center_model_printer()

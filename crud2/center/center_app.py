@@ -69,6 +69,20 @@ def create():
         po.create()
     return redirect(url_for('centercrud.crudAC'))
 
+# CRUD create/add
+@app_crud_center.route('/createCenter/', methods=["POST"])
+def createCenter():
+    """gets data from form and add it to Users table"""
+    if request.form:
+        po = Centers(
+            request.form.get("centerName"),
+            request.form.get("location"),
+            request.form.get("email"),
+            request.form.get("phone")
+        )
+        po.create()
+    return redirect(url_for('centercrud.search'))
+
 
 # CRUD read
 @app_crud_center.route('/read/', methods=["POST"])
@@ -76,7 +90,7 @@ def read():
     """gets userid from form and obtains corresponding data from Users table"""
     table = []
     if request.form:
-        centerID = request.form.get("centerID")
+        centerID = request.form.get("centerid")
         po = center_by_id(centerID)
         if po is not None:
             table = [po.read()]  # placed in list for easier/consistent use within HTML
@@ -88,7 +102,7 @@ def read():
 def update():
     """gets userid and name from form and filters and then data in  Users table"""
     if request.form:
-        centerID = request.form.get("centerID")
+        centerID = request.form.get("centerid")
         centerName = request.form.get("centerName")
         location = request.form.get("location")
         email = request.form.get("email")
@@ -107,14 +121,28 @@ def update():
 def delete():
     """gets userid from form delete corresponding record from Users table"""
     if request.form:
-        centerID = request.form.get("centerID")
+        # Getting centerid from the form in the HTML; centerid is there, not centerID; centerID is the column
+        centerID = request.form.get("centerid")
         po = center_by_id(centerID)
         if po is not None:
             po.delete()
     return redirect(url_for('centercrud.crudAC'))
 
-
 # Search Form
+@app_crud_center.route('/search/')
+def search():
+    """loads form to search Users data"""
+    return render_template("centerSearch.html")
+
+
+# Search request and response
+@app_crud_center.route('/search/term/', methods=["POST"])
+def search_term():
+    """ obtain term/search request """
+    req = request.get_json()
+    term = req['term']
+    response = make_response(jsonify(center_ilike(term)), 200)
+    return response
 
 
 

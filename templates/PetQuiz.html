@@ -2,13 +2,17 @@
 {% extends "layouts/base.html" %}
 {% block head %}
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Quiz</title>
-    <style>
-
-    </style>
     <script>
+        function timeFunction() {
+            setTimeout(function(){ alert("Give up!"); }, 5000);
+        }
+
+        function switching() {
+            if ( document.getElementById("quiz_div").style.display == 'none') {
+                document.getElementById("quiz_div").style.display = 'block';
+            }
+            timeFunction();
+        }
         function check(){
             var c=0;
             var q1=document.quiz.question1.value;
@@ -27,30 +31,34 @@
 
 {% block body %}
 <body>
-<form name="quiz" id="quiz">
-    <div>
-        <p>1. Which of these is not a common pet?</p>
-        <p><input type = "radio" name="question1" value="Rhino">A. Rhino</p>
-        <p><input type = "radio" name="question1" value="Dog">B. Dog</p>
-        <p><input type = "radio" name="question1" value="Cat">C. Cat</p>
-        <p><input type = "radio" name="question1" value="Bird">D. Bird</p>
-    </div>
-    <div>
-        <p>2. Which pet is slick and menacing?</p>
-        <p><input type = "radio" name="question2" value="Dog">A. Dog</p>
-        <p><input type = "radio" name="question2" value="Snake">B. Snake</p>
-        <p><input type = "radio" name="question2" value="Fish">C. Fish</p>
-        <p><input type = "radio" name="question2" value="Mice">D. Mice</p>
-    </div>
-    <div>
-        <p>3. Which pet is known as man's best friend?</p>
-        <p><input type = "radio" name="question3" value="Lizard">A. Lizard</p>
-        <p><input type = "radio" name="question3" value="Frog">B. Frog</p>
-        <p><input type = "radio" name="question3" value="Cat">C. Cat</p>
-        <p><input type = "radio" name="question3" value="Dog">D. Dog</p>
-    </div>
-    <input type="button" name="" value="Submit" onclick="check()">
-</form>
+<button onclick="switching()">Start Quiz with 5 second timer!</button>
+<div style="display: none;" id="quiz_div">
+    <form  name="quiz" id="quiz">
+        <div>
+            <p>1. Which of these is not a common pet?</p>
+            <p><input type = "radio" name="question1" value="Rhino">A. Rhino</p>
+            <p><input type = "radio" name="question1" value="Dog">B. Dog</p>
+            <p><input type = "radio" name="question1" value="Cat">C. Cat</p>
+            <p><input type = "radio" name="question1" value="Bird">D. Bird</p>
+        </div>
+        <div>
+            <p>2. Which pet is slick and menacing?</p>
+            <p><input type = "radio" name="question2" value="Dog">A. Dog</p>
+            <p><input type = "radio" name="question2" value="Snake">B. Snake</p>
+            <p><input type = "radio" name="question2" value="Fish">C. Fish</p>
+            <p><input type = "radio" name="question2" value="Mice">D. Mice</p>
+        </div>
+        <div>
+            <p>3. Which pet is known as man's best friend?</p>
+            <p><input type = "radio" name="question3" value="Lizard">A. Lizard</p>
+            <p><input type = "radio" name="question3" value="Frog">B. Frog</p>
+            <p><input type = "radio" name="question3" value="Cat">C. Cat</p>
+            <p><input type = "radio" name="question3" value="Dog">D. Dog</p>
+        </div>
+        <input type="button" name="" value="Submit" onclick="check()">
+    </form>
+
+</div>
 </body>
 </html>
 {% endblock %}

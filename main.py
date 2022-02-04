@@ -24,8 +24,8 @@ app.register_blueprint(btanay, url_prefix="/")
 
 
 @app.route('/')
-def index():
-    return render_template("index.html")
+def petpage():
+    return render_template("petpage.html")
 
 # runs the application on the development server
 if __name__ == "__main__":

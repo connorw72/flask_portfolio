@@ -11,6 +11,10 @@ def tanay():
 def hangman():
     return render_template('hangman.html')
 
+@btanay.route('/petguess/')
+def petguess():
+    return render_template('petguess.html')
+
 @btanay.route('/pethistory/')
 def pethistory():
     return render_template('pethistory.html')

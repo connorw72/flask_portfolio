@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+{% extends "layouts/base.html" %}
+{% block body %}
 <html lang="en">
 <body>
 <section class="container">
@@ -21,7 +23,7 @@
     }
     .container {
         height: 100%;
-        display: flex;
+        display: inline-flex;
     }
 
     #toolbar {
@@ -32,17 +34,10 @@
         background-color: #ADD8E6;
     }
 
-    #toolbar * {
-        margin-bottom: 6px;
-    }
-
     #toolbar label {
         font-size: 12px;
     }
 
-    #toolbar input {
-        width: 100%;
-    }
 
     #toolbar button {
         background-color: #1565c0;
@@ -97,3 +92,5 @@
     canvas.addEventListener('mousemove', draw);
 
 </script>
+
+{% endblock %}

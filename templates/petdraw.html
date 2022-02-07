@@ -74,7 +74,7 @@
             return;
         }
         ctx.lineCap = 'round';
-        ctx.lineTo(petdraw.clientX - canvasOffsetX, petdraw.clientY);
+        ctx.lineTo(petdraw.clientX - canvasOffsetX, petdraw.clientY - canvasOffsetY);
         ctx.stroke();
     }
 

@@ -7,6 +7,10 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/static/assets/scss/Test2.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cutive Mono">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Robot Condensed">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
 
 
@@ -17,7 +21,22 @@
 {%endblock%}
 {% block body %}
     <body>
+    <div id="google_translate_element"></div>
 
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {pageLanguage: 'en'},
+                'google_translate_element'
+            );
+        }
+    </script>
+
+    <script type="text/javascript" src=
+            "https://translate.google.com/translate_a/element.js?
+        cb=googleTranslateElementInit">
+    </script>
+    <button onclick="googleTranslateElementInit();">Translate this page to a language of your choosing!</button>
     <div class="p-5 bg-primary text-white text-center">
         <h1>Enclosures For Your Animals Page</h1>
     </div>

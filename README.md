@@ -93,11 +93,17 @@
 ### Week 7 PBL Showing the How, Theme Technicals - Crossover
 |Member| PBL|
 |:-----|:----------------------|
-|Connor| [Quiz]()
-|Tanay| []()
+|Connor| [Quiz](https://github.com/connorw72/food/blob/main/templates/PetQuiz.html)
+|Tanay| [ToDo](https://github.com/connorw72/food/blob/main/templates/todo.html)
 |Pranav|[]()
-|Colin| []()
-|Chase| []()
+|Colin| [Async](https://github.com/connorw72/food/blob/main/crud/templates/crud/crud_async.html)
+|Chase| [Quiz](https://github.com/connorw72/food/blob/main/templates/PetQuiz2.html)
+
+### Week 8 Crossover Switch
+|Member| PBL|
+|:-----|:----------------------|
+|Connor| [Google Search](https://github.com/connorw72/food/blob/main/templates/google.html), [Google Map](https://github.com/connorw72/food/blob/main/templates/map.html),[Translate](https://github.com/connorw72/food/blob/main/templates/Enclosures.html)
+|Anirudh| [Main Pet Page](https://github.com/connorw72/food/blob/nasty/templates/petpage.html), [Pet Draw](https://github.com/connorw72/food/blob/nasty/templates/petdraw.html),[Quiz Timer Function](https://github.com/connorw72/food/blob/nasty/templates/PetQuiz.html)
 
 
 

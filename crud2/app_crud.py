@@ -1,7 +1,7 @@
 """control dependencies to support CRUD app routes and APIs"""
 from flask import Blueprint, render_template, request, url_for, redirect, jsonify, make_response
 
-from crud.sql import *
+from crud2.sql import *
 
 # blueprint defaults https://flask.palletsprojects.com/en/2.0.x/api/#blueprint-objects
 app_crud = Blueprint('crud', __name__,
@@ -80,7 +80,7 @@ def delete():
 @app_crud.route('/search/')
 def search():
     """loads form to search Users data"""
-    return render_template("search.html")
+    return render_template("google.html")
 
 
 # Search request and response

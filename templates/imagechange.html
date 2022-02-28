@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <style>
+        .container{
+            width: 1000px;
+            height: 1000px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .dog-off{
+            width: 1000px;
+            height: 1000px;
+            background: url('../static/assets/cage.jpeg') no-repeat;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .dog-on{
+            width: 1000px;
+            height: 4000px;
+            background: url('../static/assets/healthy.jpeg') no-repeat;;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>Change Image on Click</title>
+</head>
+<body>
+<div class="container">
+    <h1>Click on the Dog</h1>
+    <div id="dog" class="dog-off"></div>
+</div>
+<script>
+    const light = document.getElementById('dog');
+
+    light.addEventListener('click', function(light){
+        light.target.classList.toggle('dog-on');
+    });
+</script>
+</body>
+</html>

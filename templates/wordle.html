@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+{% extends "layouts/base.html" %}
+{% block head %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wordle Clone!</title>
+
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            height: 100%;
+            font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+            "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+        }
+
+        #container {
+            display: flex;
+            background-color: black;
+            height: 100%;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        #game {
+            width: 100%;
+            max-width: 500px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            border-bottom: 1px solid rgb(58, 58, 60);
+        }
+
+        .title {
+            color: gainsboro;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 0.4rem 0 0.4rem 0;
+            text-align: center;
+            font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+            "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+        }
+
+        #board-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+            overflow: hidden;
+        }
+
+        #board {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-gap: 5px;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .square {
+            border: 2px solid rgb(58, 58, 60);
+            min-width: 60px;
+            min-height: 60px;
+            font-size: 50px;
+            font-weight: bold;
+            color: gainsboro;
+            text-transform: uppercase;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #keyboard-container {
+            height: 200px;
+        }
+
+        .keyboard-row {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin: 0 auto 8px;
+            touch-action: manipulation;
+        }
+
+        .keyboard-row button {
+            font-family: inherit;
+            font-weight: bold;
+            border: 0;
+            padding: 0;
+            height: 58px;
+            cursor: pointer;
+            background-color: rgb(129, 131, 132);
+            color: rgb(215, 218, 220);
+            flex-grow: 1;
+            text-transform: uppercase;
+            margin-right: 6px;
+            border-radius: 4px;
+            user-select: none;
+        }
+
+        .keyboard-row button.wide-button {
+            flex-grow: 1.5;
+        }
+
+        .spacer-half {
+            flex-grow: 0.5;
+        }
+    </style>
+</head>
+{% endblock %};
+
+{% block body %}
+<body>
+<div id="container">
+    <div id="game">
+        <header>
+            <h1 class="title">WORDLE</h1>
+        </header>
+
+        <div id="board-container">
+            <div id="board"></div>
+        </div>
+
+        <div id="keyboard-container">
+            <div class="keyboard-row">
+                <button data-key="q">Q</button>
+                <button data-key="w">W</button>
+                <button data-key="e">E</button>
+                <button data-key="r">R</button>
+                <button data-key="t">T</button>
+                <button data-key="y">Y</button>
+                <button data-key="u">U</button>
+                <button data-key="i">I</button>
+                <button data-key="o">O</button>
+                <button data-key="p">P</button>
+            </div>
+            <div class="keyboard-row">
+                <div class="spacer-half"></div>
+                <button data-key="a">A</button>
+                <button data-key="s">S</button>
+                <button data-key="d">D</button>
+                <button data-key="f">F</button>
+                <button data-key="g">G</button>
+                <button data-key="h">H</button>
+                <button data-key="j">J</button>
+                <button data-key="k">K</button>
+                <button data-key="l">L</button>
+                <div class="spacer-half"></div>
+            </div>
+            <div class="keyboard-row">
+                <button data-key="enter" class="wide-button">Enter</button>
+                <button data-key="z">Z</button>
+                <button data-key="x">X</button>
+                <button data-key="c">C</button>
+                <button data-key="v">V</button>
+                <button data-key="b">B</button>
+                <button data-key="n">N</button>
+                <button data-key="m">M</button>
+                <button data-key="del" class="wide-button">Del</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        createSquares();
+        getNewWord();
+
+        let guessedWords = [[]];
+        let availableSpace = 1;
+
+        let word;
+        let guessedWordCount = 0;
+
+        const keys = document.querySelectorAll(".keyboard-row button");
+
+        function getNewWord() {
+            fetch(
+                `https://wordsapiv1.p.rapidapi.com/words/?random=true&lettersMin=5&lettersMax=5`,
+                {
+                    method: "GET",
+                    headers: {
+                        "x-rapidapi-host": "wordsapiv1.p.rapidapi.com",
+                        "x-rapidapi-key":
+                            "61c5e3986dmsh20c1bee95c2230dp18d1efjsn4668bbcfc1b3",
+                    },
+                }
+            )
+                .then((response) => {
+                    return response.json();
+                })
+                .then((res) => {
+                    word = res.word;
+                })
+                .catch((err) => {
+                    console.error(err);
+                });
+        }
+
+        function getCurrentWordArr() {
+            const numberOfGuessedWords = guessedWords.length;
+            return guessedWords[numberOfGuessedWords - 1];
+        }
+
+        function updateGuessedWords(letter) {
+            const currentWordArr = getCurrentWordArr();
+
+            if (currentWordArr && currentWordArr.length < 5) {
+                currentWordArr.push(letter);
+
+                const availableSpaceEl = document.getElementById(String(availableSpace));
+
+                availableSpace = availableSpace + 1;
+                availableSpaceEl.textContent = letter;
+            }
+        }
+
+        function getTileColor(letter, index) {
+            const isCorrectLetter = word.includes(letter);
+
+            if (!isCorrectLetter) {
+                return "rgb(58, 58, 60)";
+            }
+
+            const letterInThatPosition = word.charAt(index);
+            const isCorrectPosition = letter === letterInThatPosition;
+
+            if (isCorrectPosition) {
+                return "rgb(83, 141, 78)";
+            }
+
+            return "rgb(181, 159, 59)";
+        }
+
+        function handleSubmitWord() {
+            const currentWordArr = getCurrentWordArr();
+            if (currentWordArr.length !== 5) {
+                window.alert("Word must be 5 letters");
+            }
+
+            const currentWord = currentWordArr.join("");
+
+            fetch(`https://wordsapiv1.p.rapidapi.com/words/${currentWord}`, {
+                method: "GET",
+                headers: {
+                    "x-rapidapi-host": "wordsapiv1.p.rapidapi.com",
+                    "x-rapidapi-key": "61c5e3986dmsh20c1bee95c2230dp18d1efjsn4668bbcfc1b3",
+                },
+            })
+                .then((res) => {
+                    if (!res.ok) {
+                        throw Error();
+                    }
+
+                    const firstLetterId = guessedWordCount * 5 + 1;
+                    const interval = 200;
+                    currentWordArr.forEach((letter, index) => {
+                        setTimeout(() => {
+                            const tileColor = getTileColor(letter, index);
+
+                            const letterId = firstLetterId + index;
+                            const letterEl = document.getElementById(letterId);
+                            letterEl.classList.add("animate__flipInX");
+                            letterEl.style = `background-color:${tileColor};border-color:${tileColor}`;
+                        }, interval * index);
+                    });
+
+                    guessedWordCount += 1;
+
+                    if (currentWord === word) {
+                        window.alert("Congratulations!");
+                    }
+
+                    if (guessedWords.length === 6) {
+                        window.alert(`Sorry, you have no more guesses! The word is ${word}.`);
+                    }
+
+                    guessedWords.push([]);
+                })
+                .catch(() => {
+                    window.alert("Word is not recognised!");
+                });
+        }
+
+        function createSquares() {
+            const gameBoard = document.getElementById("board");
+
+            for (let index = 0; index < 30; index++) {
+                let square = document.createElement("div");
+                square.classList.add("square");
+                square.classList.add("animate__animated");
+                square.setAttribute("id", index + 1);
+                gameBoard.appendChild(square);
+            }
+        }
+
+        function handleDeleteLetter() {
+            const currentWordArr = getCurrentWordArr();
+            const removedLetter = currentWordArr.pop();
+
+            guessedWords[guessedWords.length - 1] = currentWordArr;
+
+            const lastLetterEl = document.getElementById(String(availableSpace - 1));
+
+            lastLetterEl.textContent = "";
+            availableSpace = availableSpace - 1;
+        }
+
+        for (let i = 0; i < keys.length; i++) {
+            keys[i].onclick = ({ target }) => {
+                const letter = target.getAttribute("data-key");
+
+                if (letter === "enter") {
+                    handleSubmitWord();
+                    return;
+                }
+
+                if (letter === "del") {
+                    handleDeleteLetter();
+                    return;
+                }
+
+                updateGuessedWords(letter);
+            };
+        }
+    });
+</script>
+</body>
+</html>
+{% endblock %}

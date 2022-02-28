@@ -18,3 +18,15 @@ def birds():
 @bpranav.route('/petplanner/')
 def petplanner():
     return render_template('petplanner.html')
+
+@bpranav.route('/imagechange/')
+def imagechange():
+    return render_template('imagechange.html')
+
+@bpranav.route('/wordle/')
+def wordle():
+    return render_template('wordle.html')
+
+@bpranav.route('/wordle2/')
+def wordle2():
+    return render_template('wordle2.html')

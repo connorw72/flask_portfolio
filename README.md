@@ -1,6 +1,6 @@
 # Period 5 - Team Food
 ### Project Description:
-#### The project created by team food spreads awareness on pets and animal adoption. On the website, you will learn about the animals that you can adopt, common pets, and even where to adopt these pets if any of them are appealing to you. Find your next best friend here!
+#### The project created by team food spreads awareness on pets and animal adoption. On the website, you will learn about the animals that you can adopt, common pets, and even where to adopt these pets if any of them are appealing to you. There are even games that you can play that relate to animals in general, and different features throughout the website. Find your next best friend here!
 ## [Scrum Board](https://github.com/connorw72/food/projects/1)
 ## Website Home Page
 

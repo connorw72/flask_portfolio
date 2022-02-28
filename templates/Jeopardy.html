@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+{% extends "layouts/base.html" %}
+{% block head %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Jeopardy</title>
+    <style>
+        table, th, td, tr {
+            border:3px solid blue;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .button {
+            background-color: cornflowerblue; /* Green */
+            border: none;
+            color: white;
+            padding: 16px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.5s;
+            cursor: pointer;
+        }
+
+        .button1 {
+            background-color: cornflowerblue;
+            color: black;
+            border: 2px solid navy;
+        }
+
+        .button1:hover {
+            background-color: blue;
+            color: black;
+
+        }
+
+        .button2 {
+            background-color: rgb(255, 255, 0);
+            color: black;
+            border: 2px solid navy;
+        }
+
+        .button2:hover {
+            background-color: yellowgreen;
+            color: black;
+
+        }
+
+        .button3 {
+            background-color: red;
+            color: black;
+            border: 2px solid brown;
+        }
+
+        .button3:hover {
+            background-color: maroon;
+            color: black;
+
+        }
+
+        .showscore {
+            text-align: right;
+        }
+    </style>
+</head>
+{% endblock %}
+{% block body %}
+<body style="background-color:powderblue;">
+<h1 style="text-align:center"> Jeopardy Game </h1>
+<h3 style="text-align:left"> True or False! </h3>
+<div>
+    <p> score: </p>
+    <p id="showscore"> </p>
+</div>
+<table style="width:90%;height:100%" >
+<tr>
+    <th>Dogs</th>
+    <th>Cats</th>
+</tr>
+<tr>
+    <td>
+        <div>
+            <form name="quiz" id="quiz">
+                <div id='question' style='display: none'>
+                    <p id="sc3"></p>
+                    <input type="input" id="answer" value="" ><br>
+                    <button onclick="getAnswer()">Click to submit</button>
+                </div>
+                <button class="button button1" type="button" onclick="toggleQuestion();hideButton(this);">300 Points</button>
+        </div>
+        </div></td>
+    <td>
+        <div>
+            <form name="quiz" id="quiz">
+                <div id='question2' style='display:none'>
+                    <p id="an3"></p>
+                    <input type="input" id="answer2" value="" ><br>
+                    <button onclick="getAnswer2()">Click to submit</button>
+                </div>
+                <button class="button button1" type="button" onclick="toggleQuestion2();hideButton(this);">300 Points</button>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <div>
+            <form name="quiz" id="quiz">
+                <div id='question3' style='display:none'>
+                    <p id="sc2"></p>
+                    <input type="input" id="answer3" value="" ><br>
+                    <button onclick="getAnswer3()">Click to submit</button>
+                </div>
+                <button class="button button2" type="button" onclick="toggleQuestion3();hideButton(this);">200 Points</button>
+        </div>
+    </td>
+    <td>
+        <div>
+            <form name="quiz" id="quiz">
+                <div id='question4' style='display:none'>
+                    <p id="an2"></p>
+                    <input type="input" id="answer4" value="" ><br>
+                    <button onclick="getAnswer4()">Click to submit</button>
+                </div>
+                <button class="button button2" type="button" onclick="toggleQuestion4();hideButton(this);">200 Points</button>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <div>
+            <form name="quiz" id="quiz">
+                <div id='question5' style='display:none'>
+                    <p id="sc1"></p>
+                    <input type="input" id="answer5" value="" ><br>
+                    <button onclick="getAnswer5()">Click to submit</button>
+                </div>
+                <button class="button button3" type="button" onclick="toggleQuestion5();hideButton(this);">100 Points</button>
+        </div>
+    </td>
+    <td>
+        <div>
+            <form name="quiz" id="quiz">
+                <div id='question6' style='display:none'>
+                    <p id="an1"></p>
+                    <input type="input" id="answer6" value="" ><br>
+                    <button onclick="getAnswer6()">Click to submit</button>
+                </div>
+                <button class="button button3" type="button" onclick="toggleQuestion6();hideButton(this);">100 points</button>
+        </div>
+    </td>
+</tr>
+    <script>
+        function toggleQuestion() {
+            var text = document.getElementById("question");
+            if (text.style.display === "none") {
+                text.style.display = "block";
+            } else {
+                text.style.display = "none";
+            }
+        }
+        function toggleQuestion2() {
+            var text = document.getElementById("question2");
+            if (text.style.display === "none") {
+                text.style.display = "block";
+            } else {
+                text.style.display = "none";
+            }
+        }
+        function toggleQuestion3() {
+            var text = document.getElementById("question3");
+            if (text.style.display === "none") {
+                text.style.display = "block";
+            } else {
+                text.style.display = "none";
+            }
+        }
+        function toggleQuestion4() {
+            var text = document.getElementById("question4");
+            if (text.style.display === "none") {
+                text.style.display = "block";
+            } else {
+                text.style.display = "none";
+            }
+        }
+        function toggleQuestion5() {
+            var text = document.getElementById("question5");
+            if (text.style.display === "none") {
+                text.style.display = "block";
+            } else {
+                text.style.display = "none";
+            }
+        }
+        function toggleQuestion6() {
+            var text = document.getElementById("question6");
+            if (text.style.display === "none") {
+                text.style.display = "block";
+            } else {
+                text.style.display = "none";
+            }
+        }
+        function hideButton(x)
+        {
+            x.style.display = 'none';
+        }
+        var score=0;
+        function getAnswer(){
+            let useranswer = document.getElementById("answer").value;
+            if (useranswer=="true"){
+                score +=300;
+                document.getElementById("showscore").innerHTML = score;
+                event.preventDefault();
+            }
+            else if (useranswer=="false"){
+                score -=300;
+                document.getElementById("showscore").innerHTML = score;
+                event.preventDefault();
+            }
+            else{
+                alert("Invalid input! Remember, true or false answers only!");
+                event.preventDefault();
+            }
+        }
+        function getAnswer2(){
+            let useranswer2 = document.getElementById("answer2").value;
+            if (useranswer2=="true"){
+                score -=300;
+                document.getElementById("showscore").innerHTML = score;
+                event.preventDefault();
+            }
+            else if (useranswer2=="false"){
+                score +=300;
+                document.getElementById("showscore").innerHTML = score;
+                event.preventDefault();
+            }
+            else{
+                alert("Invalid input! Remember, true or false answers only!");
+                event.preventDefault();
+            }
+        }
+        function getAnswer3(){
+            let useranswer3 = document.getElementById("answer3").value;
+            if (useranswer3=="true"){
+                score +=200;
+                document.getElementById("showscore").innerHTML = score;
+                event.preventDefault();
+            }
+            else if (useranswer3=="false"){
+                score -=200;
+                document.getElementById("showscore").innerHTML = score;
+                event.preventDefault();
+            }
+            else{
+                alert("Invalid input! Remember, true or false answers only!");
+                event.preventDefault();
+            }
+        }
+        function getAnswer4(){
+            let useranswer4 = document.getElementById("answer4").value;
+            if (useranswer4=="true"){
+                score -=200;
+                document.getElementById("showscore").innerHTML = score;
+                event.preventDefault();
+            }
+            else if (useranswer4=="false"){
+                score +=200;
+                document.getElementById("showscore").innerHTML = score;
+                event.preventDefault();
+            }
+            else{
+                alert("Invalid input! Remember, true or false answers only!");
+                event.preventDefault();
+            }
+        }
+        function getAnswer5(){
+            let useranswer5 = document.getElementById("answer5").value;
+            if (useranswer5=="true"){
+                score +=100;
+                document.getElementById("showscore").innerHTML = score;
+                event.preventDefault();
+            }
+            else if (useranswer5=="false"){
+                score -=100;
+                document.getElementById("showscore").innerHTML = score;
+                event.preventDefault();
+            }
+            else{
+                alert("Invalid input! Remember, true or false answers only!");
+                event.preventDefault();
+            }
+        }
+        function getAnswer6(){
+            let useranswer6 = document.getElementById("answer6").value;
+            if (useranswer6=="true"){
+                score +=100;
+                document.getElementById("showscore").innerHTML = score;
+                event.preventDefault();
+            }
+            else if (useranswer6=="false"){
+                score -=100;
+                document.getElementById("showscore").innerHTML = score;
+                event.preventDefault();
+            }
+            else{
+                alert("Invalid input! Remember, true or false answers only!");
+                event.preventDefault();
+            }
+        }
+        var ask = ["A corgi is a type of dog.", "A boa is a dog breed.", "Dogs are known as man's best friend.", "It is recommended to feed cats dry and wet food.", "A pitbull is a cat breed.", "Cat's require lots of attention and care, and need to be walked often.",];
+        for(var i in ask){
+            document.getElementById("an3").innerHTML = ask[i];
+            document.getElementById("an2").innerHTML = ask[i-1];
+            document.getElementById("an1").innerHTML = ask[i-2];
+            document.getElementById("sc3").innerHTML = ask[i-3];
+            document.getElementById("sc2").innerHTML = ask[i-4];
+            document.getElementById("sc1").innerHTML = ask[i-5];
+        }
+    </script>
+        </body>
+{% endblock %}
+</html>

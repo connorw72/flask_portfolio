@@ -5,6 +5,8 @@
     <title>Animal Trivia</title>
     <style>
         /* hue code and ideas thanks to https://www.w3schools.com/css/css_colors_hsl.asp */
+        /* hue css responsible for changing color of backgrounds, showing buttons and colors of buttons etc. */
+        
         *, *::before, *::after {
             box-sizing: border-box;
         }
@@ -104,7 +106,8 @@
     </style>
 {% endblock %}
 {% block body %}
-<div class="container">
+    <!-- code creating the buttons in html, adding classes and id's to the buttons to be called and referenced throughout code -->
+    <div class="container">
     <div id="questionContainer" class="hide">
         <div id="question">Question</div>
         <div id="answerButtons" class="btn-grid">
@@ -126,6 +129,7 @@
 <script>
 
 //Javascript created with help from WebDevSimplified courses
+// create constants and add elements to each button
     const startButton = document.getElementById('startButton')
     const nextButton = document.getElementById('nextButton')
     const questionContainerElement = document.getElementById('questionContainer')
@@ -133,13 +137,13 @@
     const answerButtonsElement = document.getElementById('answerButtons')
 
     let questionList, currentQuestion
-
+// adds event listener to activate different functions when pressing the startgame button
     startButton.addEventListener('click', startGame)
     nextButton.addEventListener('click', () => {
         currentQuestion++
         nextQuestion()
     })
-
+// function in order to start game when pressing the start game button
     function startGame() {
         startButton.classList.add('hide')
         questionList = questions.sort(() => Math.random() - .5)
@@ -147,12 +151,12 @@
         questionContainerElement.classList.remove('hide')
         nextQuestion()
     }
-
+// function to move between questions when pressing next button
     function nextQuestion() {
         reset()
         showQuestion(questionList[currentQuestion])
     }
-
+// function to show the current/new question
     function showQuestion(question) {
         questionElement.innerText = question.question
         question.answers.forEach(answer => {
@@ -166,7 +170,7 @@
             answerButtonsElement.appendChild(button)
         })
     }
-
+// reset the events, listeners and such in order to have a clear slate and allow the program to go through each function again
     function reset() {
         clearStatus(document.body)
         nextButton.classList.add('hide')
@@ -174,7 +178,8 @@
             answerButtonsElement.removeChild(answerButtonsElement.firstChild)
         }
     }
-
+// function that tells you if the answer you selected was correct or incorrect and keeps track of what question you're on
+// will also reset the game if you reach the end of the questions
     function selectAnswer(e) {
         const selectedButton = e.target
         const correct = selectedButton.dataset.correct
@@ -189,7 +194,7 @@
             startButton.classList.remove('hide')
         }
     }
-
+// sets elements of backgrounds, colors and such when you choose an answer depending on if your answer is correct or incorrect
     function setStatus(element, correct) {
         clearStatus(element)
         if (correct) {
@@ -206,6 +211,7 @@
 
 
     //trivia questions thanks to https://www.usefultrivia.com/science_trivia/animal_trivia_index.html
+    // list of questions and answers to be put into the different parts such as the question and possible answers
     const questions = [
         {
             question: 'What animal has the longest lifespan?',
